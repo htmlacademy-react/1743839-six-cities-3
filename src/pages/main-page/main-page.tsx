@@ -1,10 +1,13 @@
-import Cities from '../components/cities';
-import Header from '../components/header';
-import CitiesPlaces from '../components/cities-places';
-import Map from '../components/map';
+import Cities from '../../components/main-page-component/cities';
+import Header from '../../components/main-page-component/header';
+import CitiesPlaces from '../../components/main-page-component/cities-places';
+import Map from '../../components/main-page-component/map';
 
+type NumberOfProposals = {
+  offersCount: number;
+}
 
-function MainPage (): JSX.Element {
+function MainPage ({offersCount}: NumberOfProposals): JSX.Element {
   return (
     <div className = "page page--gray page--main">
       <Header />
@@ -16,7 +19,7 @@ function MainPage (): JSX.Element {
         <div className="cities">
           <div className="cities__places-container container">
             <section className="cities__places places">
-              <CitiesPlaces />
+              <CitiesPlaces offersCount={offersCount}/>
             </section>
             <div className="cities__right-section">
               <Map />

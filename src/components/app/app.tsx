@@ -1,8 +1,9 @@
-import MainPage from '../../pages/main-page';
+import MainPage from '../../pages/main-page/main-page';
+import { offersCount } from '../const';
 
-function App () {
+function App (): JSX.Element {
   return (
-    <MainPage />
+    <MainPage offersCount={offersCount}/>
   );
 }
 

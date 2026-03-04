@@ -1,8 +1,13 @@
-import {citiesData} from '../components/const';
+import {citiesData} from '../const';
 
 const citiesActive: number[] = [4];
 
-function City ({city, isCitiesActive = true}): JSX.Element {
+type CityProps = {
+  city: string;
+  isCitiesActive: boolean;
+}
+
+function City ({city, isCitiesActive = true}: CityProps): JSX.Element {
   const classCity = `locations__item-link tabs__item" href="#"
   ${isCitiesActive ? 'tabs__item--active' : 'href="#"'}
   `;

@@ -1,22 +1,4 @@
-import { temps } from "./const";
-
-function CitiesCard () {
-  const cards = temps.map((item) => (
-    <Card
-      key = {item.id}
-      url = {item.previewImage}
-      title = {item.title}
-      type = {item.type}
-      price = {item.price}
-      isPremium = {item.isPremium}
-    />
-  ));
-  return (
-    <>
-      {cards}
-    </>
-  );
-}
+import { temps } from '../const';
 
 function Premium () {
   return (
@@ -26,8 +8,15 @@ function Premium () {
   );
 }
 
+type CardProps = {
+  url: string;
+  title: string;
+  type: string;
+  price: number;
+  isPremium: boolean;
+}
 
-function Card({url, title, type, price, isPremium}) {
+function Card({url, title, type, price, isPremium}: CardProps): JSX.Element {
   return (
     <article className="cities__card place-card">
       {isPremium ? <Premium /> : ''}
@@ -63,5 +52,24 @@ function Card({url, title, type, price, isPremium}) {
     </article>
   );
 }
+
+function CitiesCard () {
+  const cards = temps.map((item) => (
+    <Card
+      key = {item.id}
+      url = {item.previewImage}
+      title = {item.title}
+      type = {item.type}
+      price = {item.price}
+      isPremium = {item.isPremium}
+    />
+  ));
+  return (
+    <div className="cities__places-list places__list tabs__content">
+      {cards}
+    </div>
+  );
+}
+
 
 export default CitiesCard;

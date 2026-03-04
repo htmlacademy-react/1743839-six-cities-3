@@ -1,3 +1,5 @@
+const offersCount = 100;
+
 const citiesData = [{
   id:1,
   city:'Paris',
@@ -24,12 +26,19 @@ const citiesData = [{
   active: false
 }];
 
-const options: string[] = [
-  'Popular',
-  'Price: low to high',
-  'Price: high to low',
-  'Top rated first'
-];
+const options = [{
+  id: 1,
+  category: 'Popular'
+}, {
+  id: 2,
+  category: 'Price: low to high'
+}, {
+  id: 3,
+  category: 'Price: high to low'
+}, {
+  id: 4,
+  category: 'Top rated first'
+}];
 
 const temps = [{
   id: '1',
@@ -68,4 +77,4 @@ const temps = [{
   isPremium: false
 }];
 
-export {citiesData, options, temps};
+export {citiesData, options, temps, offersCount};
