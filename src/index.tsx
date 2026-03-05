@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
+import { offersCount } from './components/const';
 
 
 const root = ReactDOM.createRoot(
@@ -9,6 +10,6 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <App />
+    <App offersCount = {offersCount}/>
   </React.StrictMode>
 );

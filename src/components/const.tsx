@@ -1,4 +1,4 @@
-const offersCount = 100;
+const offersCount = 333;
 
 const citiesData = [{
   id:1,
