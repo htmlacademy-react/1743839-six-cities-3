@@ -77,4 +77,5 @@ const temps = [{
   isPremium: false
 }];
 
+
 export {citiesData, options, temps, offersCount};
