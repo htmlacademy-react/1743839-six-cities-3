@@ -32,7 +32,7 @@ function App ({offersCount}: NumberOfProposals): JSX.Element {
           <Route
             path={AppRoute.Favorites}
             element={(
-              <PrivateRoute autorizationStatus = {AutorizationStatus.NoAuth}>
+              <PrivateRoute autorizationStatus = {AutorizationStatus.Auth}>
                 <FavoritesPage />
               </PrivateRoute>
             )}

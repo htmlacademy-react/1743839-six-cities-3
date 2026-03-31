@@ -1,4 +1,5 @@
 const offersCount = 333;
+const statusAutorization = 'AUTH';
 
 const citiesData = [{
   id:1,
@@ -78,4 +79,4 @@ const temps = [{
 }];
 
 
-export {citiesData, options, temps, offersCount};
+export {citiesData, options, temps, offersCount, statusAutorization};
