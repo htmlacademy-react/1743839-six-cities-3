@@ -120,9 +120,9 @@ function OfferPage () {
   const classFavorite = `offer__bookmark-button button
   ${user?.isFavorite ? 'offer__bookmark-button--active button' : ''}
   `;
-  let countComments=0;
+  let countComments = 0;
   const comment = comments.find((item) => item.id === id);
-  {comment === undefined ? countComments : countComments = comment?.reviews.length}
+  {comment === undefined ? countComments : countComments = comment?.reviews.length;}
   return (
     <div className="page">
       <header className="header">

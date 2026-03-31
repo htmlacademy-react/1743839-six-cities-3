@@ -40,10 +40,11 @@ function Card({previewImage, title, type, price, isPremium, rating, isFavorite, 
   const classFavorite = `place-card__bookmark-button button
   ${isFavorite ? 'place-card__bookmark-button--active' : ''}
   `;
+/*
   const handleMouseOver = () => {
-    //console.log('Mouse detected!');
+    console.log('Mouse detected!');
   };
-
+*/
   let idOffer = '';
   const handleClick = () => {
     idOffer = `offer/id${ id}`;
@@ -54,7 +55,7 @@ function Card({previewImage, title, type, price, isPremium, rating, isFavorite, 
 
   return (
     <article className="cities__card place-card"
-
+      //onMouseOver={handleMouseOver}
       onClick={handleClick}
     >
       {isPremium ? <Premium /> : ''}

@@ -9,7 +9,7 @@ function Comment({comment, url, date, rating, name}) {
           <img className="reviews__avatar user__avatar" src={url} width="54" height="54" alt="Reviews avatar" />
         </div>
         <span className="reviews__user-name">
-            {name}
+          {name}
         </span>
       </div>
       <div className="reviews__info">

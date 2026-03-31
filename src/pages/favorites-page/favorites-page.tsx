@@ -40,16 +40,7 @@ function Fn (a, b) {
 }
 
 const vvv = a.sort(Fn);
-console.log(vvv);
-
-const rte = isCity('Amsterdam');
-console.log(rte);
-
-const tyu = isCity('Paris');
-console.log(tyu);
-
-//console.log(vvv[0].city);
-
+//console.log(vvv);
 
 function RT () {
   const u = vvv.map((item) => (
@@ -68,9 +59,9 @@ function RT () {
 
 function Waq ({j, k}) {
   const z = j;
-  console.log(z);
+  //console.log(z);
   const zz = k;
-  console.log(zz);
+  //console.log(zz);
   return (
     zz > 0 ?
       <li className="favorites__locations-items">
