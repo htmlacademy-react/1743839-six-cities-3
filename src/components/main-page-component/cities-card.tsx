@@ -60,9 +60,9 @@ function Card({previewImage, title, type, price, isPremium, rating, isFavorite, 
     >
       {isPremium ? <Premium /> : ''}
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <Link to={rrr}>
+        <a href="#">
           <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place image" />
-        </Link>
+        </a>
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
@@ -89,7 +89,9 @@ function Card({previewImage, title, type, price, isPremium, rating, isFavorite, 
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">{title}</a>
+          <Link to={rrr}>
+            {title}
+          </Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>
