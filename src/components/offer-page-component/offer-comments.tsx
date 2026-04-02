@@ -1,6 +1,8 @@
 const months = ['January', 'February', 'March', 'April','May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
-function Comment({comment, url, date, rating, name}) {
+function Comment(
+  {comment, url, date, rating, name}:{comment: string; url: string; date: string; rating: number; name: string}
+) {
   const star = (`${Math.round(rating) * 20}%`);
   return (
     <li className="reviews__item">
@@ -32,14 +34,27 @@ function Comment({comment, url, date, rating, name}) {
   );
 }
 
-function OfferComments ({id, array}) {
-  //console.log('Comm' + id);
+type CommentProps = {
+  id: string;
+  date: string;
+  user: {
+    name: string;
+    avatarUrl: string;
+    isPro: boolean;
+  };
+  comment: string;
+  rating: number;
+};
+
+
+function OfferComments ({id, array}:{id: string}) {
   //console.log(array);
-  let obj = {};
+  let obj= {};
   obj = array.find((item) => item.id == id);
-
-
-  const rs = obj.reviews.map((item) => (
+  //console.log(obj);
+  const wqw = obj.reviews;
+  //console.log(wqw);
+  const rs = wqw.map((item) => (
     <Comment
       key = {item.id}
       comment = {item.comment}
