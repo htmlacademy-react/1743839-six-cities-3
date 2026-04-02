@@ -1,6 +1,15 @@
-function OfferInsideList ({ti}): JSX.Element {
-  const insides = ti.map((item) => (
+function InsideItem ({inside} : {inside: string}): JSX.Element {
+  return (
+    <li className="offer__inside-item">
+      {inside}
+    </li>
+  );
+}
+
+function OfferInsideList ({ti} : {ti: string[]}): JSX.Element {
+  const insides = ti.map((item: string) => (
     <InsideItem
+      key = {item}
       inside = {item}
     />
   ));
@@ -11,12 +20,5 @@ function OfferInsideList ({ti}): JSX.Element {
   );
 }
 
-function InsideItem ({inside}: string): JSX.Element {
-  return (
-    <li className="offer__inside-item">
-      {inside}
-    </li>
-  );
-}
 
 export default OfferInsideList;

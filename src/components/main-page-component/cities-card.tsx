@@ -40,7 +40,7 @@ function Card({previewImage, title, type, price, isPremium, rating, isFavorite, 
   const classFavorite = `place-card__bookmark-button button
   ${isFavorite ? 'place-card__bookmark-button--active' : ''}
   `;
-/*
+  /*
   const handleMouseOver = () => {
     console.log('Mouse detected!');
   };

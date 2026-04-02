@@ -148,7 +148,7 @@ function OfferPage () {
               </div>
               <div className="offer__inside">
                 <h2 className="offer__inside-title">What&apos;s inside</h2>
-                <OfferInsideList ti={user?.goods}/>
+                <OfferInsideList ti={user?.goods} />
               </div>
               <div className="offer__host">
                 <h2 className="offer__host-title">Meet the host</h2>
