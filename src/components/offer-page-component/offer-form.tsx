@@ -1,17 +1,26 @@
-import * as React from "react";
+import * as React from 'react';
+
+function Details({review}: {review: string}) {
+  return (
+    <>
+      <h2>Проверка введённых данных:</h2>
+      <p>
+        <b>Комментарий: </b><br />{review}
+      </p>
+    </>
+  );
+}
 
 
 function OfferForm () {
-  const [formData, setFormData] = React.useState(
-    {
-      comment: ''
-    }
-  );
+  const [formData, setFormData] = React.useState({
+    review: ' '
+  });
 
   const handleFieldChange = (evt) => {
     const {name, value} = evt.target;
     setFormData({...formData, [name]: value});
-  }
+  };
 
 
   return (
@@ -54,13 +63,16 @@ function OfferForm () {
         </label>
       </div>
 
-      <textarea className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved" onChange={handleFieldChange} value={formData.comment}></textarea>
+      <textarea onChange={handleFieldChange} value={formData.review} className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved" ></textarea>
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
         To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
         </p>
         <button className="reviews__submit form__submit button" type="submit" disabled>Submit</button>
       </div>
+
+      <Details {...formData} />
+
 
     </form>
   );
