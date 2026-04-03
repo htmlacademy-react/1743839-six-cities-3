@@ -1,106 +1,44 @@
 import {Link} from 'react-router-dom';
 import { favoritesOffers } from '../../mocks/favorites-offers';
 
-const city = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
+const cities = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
 
-function isCity (city) {
-  const arrayCity = [];
+function isCityFavorite (city: string) {
+  const citiesFavorite = [];
   for (let i = 0; i < favoritesOffers.length; i++) {
     if (favoritesOffers[i].isFavorite === true && favoritesOffers[i].city.name === city) {
-      arrayCity.push(favoritesOffers[i]);
+      citiesFavorite.push(favoritesOffers[i]);
     }
   }
-  return arrayCity;
+  return citiesFavorite;
 }
 
-const jj = [];
-for (let i = 0; i < city.length; i++) {
-  const x = isCity(city[i]).length;
-  jj.push(x);
+const countsFavoriteCities = [];
+for (let i = 0; i < cities.length; i++) {
+  const countsFavoriteCity = isCityFavorite(cities[i]).length;
+  countsFavoriteCities.push(countsFavoriteCity);
 }
-//console.log(jj);
 
 let countOffer = 0;
-for (let i = 0; i < jj.length; i++) {
-  countOffer = countOffer + jj[i];
-}
-//console.log(countOffer);
-
-const a = [];
-for (let i = 0; i < city.length; i++) {
-  const b = {};
-  b.id = i;
-  b.city = city[i];
-  b.length = jj[i];
-  a.push(b);
+for (let i = 0; i < countsFavoriteCities.length; i++) {
+  countOffer = countOffer + countsFavoriteCities[i];
 }
 
-function Fn (a, b) {
+const arrayFavotiteCities = [];
+for (let i = 0; i < cities.length; i++) {
+  const objCity = {};
+  objCity.id = i;
+  objCity.city = cities[i];
+  objCity.length = countsFavoriteCities[i];
+  arrayFavotiteCities.push(objCity);
+}
+
+function SortArray (a: number, b: number): number {
   return b.length - a.length;
 }
 
-const vvv = a.sort(Fn);
-//console.log(vvv);
+const arrayFavotiteCitiesSort = arrayFavotiteCities.sort(SortArray);
 
-function RT () {
-  const u = vvv.map((item) => (
-    <Waq
-      j = {item.city}
-      k={item.length}
-    />
-  ));
-  return (
-    <>
-      {u}
-    </>
-  );
-}
-
-
-function Waq ({j, k}) {
-  const z = j;
-  //console.log(z);
-  const zz = k;
-  //console.log(zz);
-  return (
-    zz > 0 ?
-      <li className="favorites__locations-items">
-        <div className="favorites__locations locations locations--current">
-          <div className="locations__item">
-            <a className="locations__item-link" href="#">
-              <span>{z}</span>
-            </a>
-          </div>
-        </div>
-        <div className="favorites__places">
-          <Waq1 N = {z} />
-        </div>
-      </li>
-      : <></>
-  );
-}
-
-function Waq1 ({N}) {
-  const cards = isCity(N).map((item)=>(
-    <Waq2
-      key={item.id}
-      url={item.previewImage}
-      price={item.price}
-      title={item.title}
-      isPremium={item.isPremium}
-      type={item.type
-        .split(' ')
-        .map((element) => `${element[0].toUpperCase()}${element.slice(1).toLowerCase()}`)
-        .join(' ')}
-      rating={item.rating}
-    />
-  ));
-  return (
-    <>
-      {cards}
-    </>
-  );
-}
 
 function Premium () {
   return (
@@ -110,7 +48,7 @@ function Premium () {
   );
 }
 
-function Waq2 ({url, price, title, isPremium, type, rating}) {
+function ShowItemOffersCity ({url, price, title, isPremium, type, rating}: {url:string; price:number; title:string; isPremium: boolean; type: string; rating: number}) {
   const star = (`${Math.round(rating) * 20}%`);
   return (
     <article className="favorites__card place-card">
@@ -153,6 +91,64 @@ function Waq2 ({url, price, title, isPremium, type, rating}) {
   );
 }
 
+function ShowOfferCity ({city}:{city: string}) {
+  const cards = isCityFavorite(city).map((item)=>(
+    <ShowItemOffersCity
+      key={item.id}
+      url={item.previewImage}
+      price={item.price}
+      title={item.title}
+      isPremium={item.isPremium}
+      type={item.type
+        .split(' ')
+        .map((element) => `${element[0].toUpperCase()}${element.slice(1).toLowerCase()}`)
+        .join(' ')}
+      rating={item.rating}
+    />
+  ));
+  return (
+    cards
+  );
+}
+
+function ShowOffersCity ({cityFavorite, cityFavoriteCounts}:{cityFavorite:string; cityFavoriteCounts:number}) {
+  return (
+    cityFavoriteCounts > 0 ?
+      <li className="favorites__locations-items">
+        <div className="favorites__locations locations locations--current">
+          <div className="locations__item">
+            <a className="locations__item-link" href="#">
+              <span>{cityFavorite}</span>
+            </a>
+          </div>
+        </div>
+        <div className="favorites__places">
+          <ShowOfferCity city = {cityFavorite} />
+        </div>
+      </li>
+      : null
+  );
+}
+
+type Q = {
+  id: number;
+  city: string;
+  length: number;
+}
+
+function ShowItemOffersCities () {
+  const offersCity = arrayFavotiteCitiesSort.map((item: Q) => (
+    <ShowOffersCity
+      key = {item.id}
+      cityFavorite = {item.city}
+      cityFavoriteCounts={item.length}
+    />
+  ));
+  return (
+    offersCity
+  );
+}
+
 
 function FavoritesEmptyPage () {
   return (
@@ -167,22 +163,17 @@ function FavoritesEmptyPage () {
 }
 
 function FavoritesMainPage () {
-
-
   return (
     <section className="favorites">
       <h1 className="favorites__title">Saved listing</h1>
-
       <ul className="favorites__list">
-        <RT />
+        <ShowItemOffersCities />
       </ul>
-
     </section>
   );
 }
 
 function FavoritesPage () {
-
   return (
     <div className="page">
       <header className="header">

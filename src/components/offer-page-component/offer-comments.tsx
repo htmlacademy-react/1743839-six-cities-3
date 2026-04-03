@@ -46,15 +46,18 @@ type CommentProps = {
   rating: number;
 };
 
+type ObjProps = {
+  id: string;
+  reviews: CommentProps[];
+}
 
-function OfferComments ({id, array}:{id: string}) {
-  //console.log(array);
-  let obj= {};
-  obj = array.find((item) => item.id == id);
-  //console.log(obj);
-  const wqw = obj.reviews;
-  //console.log(wqw);
-  const rs = wqw.map((item) => (
+type ArrayProps = ObjProps[];
+
+function OfferComments ({id, array}: {id: string; array: ArrayProps}) {
+  let objCommentsOffer: ObjProps = {};
+  objCommentsOffer = array.find((item) => item.id === id);
+  const reviewsCommentsOffer = objCommentsOffer.reviews;
+  const reviewsComment = reviewsCommentsOffer.map((item: CommentProps) => (
     <Comment
       key = {item.id}
       comment = {item.comment}
@@ -67,7 +70,7 @@ function OfferComments ({id, array}:{id: string}) {
 
   return (
     <ul className="reviews__list">
-      {rs}
+      {reviewsComment}
     </ul>
   );
 }

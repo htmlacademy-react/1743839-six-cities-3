@@ -8,6 +8,7 @@ import OfferForm from '../../components/offer-page-component/offer-form';
 import { comments } from '../../mocks/reviews';
 
 const users = detailedOffers;
+let countComments;
 
 function AuthorizedUserHeader () {
   return (
@@ -67,6 +68,15 @@ function Pro () {
   );
 }
 
+function CountRewies (id: string): number {
+  const comment = comments.find((item) => item.id === id);
+  if (comment === undefined) {
+    countComments = 0;
+  } else {
+    countComments = comment?.reviews.length;
+  }
+  return countComments;
+}
 
 function OfferPage () {
   const currentUrl = new URL(window.location.href);
@@ -76,9 +86,8 @@ function OfferPage () {
   const classFavorite = `offer__bookmark-button button
   ${user?.isFavorite ? 'offer__bookmark-button--active button' : ''}
   `;
-  let countComments = 0;
-  const comment = comments.find((item) => item.id === id);
-  {comment === undefined ? countComments : countComments = comment?.reviews.length;}
+  countComments = CountRewies(id);
+
   return (
     <div className="page">
       <header className="header">
