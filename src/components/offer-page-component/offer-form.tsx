@@ -18,7 +18,7 @@ function OfferForm () {
   });
 
   const handleFieldChange = (evt) => {
-    const {name, value} = evt.target;
+    const {name, value}: {name: string; value: string} = evt.target;
     setFormData({...formData, [name]: value});
   };
 

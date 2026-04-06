@@ -1,7 +1,4 @@
-//import { temps } from '../const';
-//import listOffer from '../../mocks/offers';
 import {Link} from 'react-router-dom';
-
 
 function Premium () {
   return (
@@ -51,7 +48,7 @@ function Card({previewImage, title, type, price, isPremium, rating, isFavorite, 
     return idOffer;
   };
 
-  const rrr = `offer/id${ id}`;
+  const adresId = `offer/id${ id}`;
 
   return (
     <article className="cities__card place-card"
@@ -89,7 +86,7 @@ function Card({previewImage, title, type, price, isPremium, rating, isFavorite, 
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={rrr}>
+          <Link to={adresId}>
             {title}
           </Link>
         </h2>
