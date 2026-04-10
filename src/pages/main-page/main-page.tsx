@@ -1,5 +1,5 @@
 import Cities from '../../components/main-page-component/cities';
-import Header from '../../components/main-page-component/header';
+import {Header} from '../../components/main-page-component/header';
 import CitiesPlaces from '../../components/main-page-component/cities-places';
 import Map from '../../components/main-page-component/map';
 

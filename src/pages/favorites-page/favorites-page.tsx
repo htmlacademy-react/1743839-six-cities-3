@@ -1,28 +1,5 @@
 import {Link} from 'react-router-dom';
-import { favoritesOffers } from '../../mocks/favorites-offers';
-
-const cities = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
-
-function isCityFavorite (city: string) {
-  const citiesFavorite = [];
-  for (let i = 0; i < favoritesOffers.length; i++) {
-    if (favoritesOffers[i].isFavorite === true && favoritesOffers[i].city.name === city) {
-      citiesFavorite.push(favoritesOffers[i]);
-    }
-  }
-  return citiesFavorite;
-}
-
-const countsFavoriteCities = [];
-for (let i = 0; i < cities.length; i++) {
-  const countsFavoriteCity = isCityFavorite(cities[i]).length;
-  countsFavoriteCities.push(countsFavoriteCity);
-}
-
-let countOffer = 0;
-for (let i = 0; i < countsFavoriteCities.length; i++) {
-  countOffer = countOffer + countsFavoriteCities[i];
-}
+import { isCityFavorite, cities, countOffer, countsFavoriteCities } from '../../components/favorites-page-component/favorites-offers';
 
 const arrayFavotiteCities = [];
 for (let i = 0; i < cities.length; i++) {
@@ -38,7 +15,6 @@ function SortArray (a: number, b: number): number {
 }
 
 const arrayFavotiteCitiesSort = arrayFavotiteCities.sort(SortArray);
-
 
 function Premium () {
   return (
@@ -130,14 +106,14 @@ function ShowOffersCity ({cityFavorite, cityFavoriteCounts}:{cityFavorite:string
   );
 }
 
-type Q = {
+type PropsCitiesObj = {
   id: number;
   city: string;
   length: number;
 }
 
 function ShowItemOffersCities () {
-  const offersCity = arrayFavotiteCitiesSort.map((item: Q) => (
+  const offersCity = arrayFavotiteCitiesSort.map((item: PropsCitiesObj) => (
     <ShowOffersCity
       key = {item.id}
       cityFavorite = {item.city}

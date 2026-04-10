@@ -7,6 +7,8 @@ import OfferComments from '../../components/offer-page-component/offer-comments'
 import OfferForm from '../../components/offer-page-component/offer-form';
 import OfferNearPlaces from '../../components/offer-page-component/offer-near-places';
 import { comments } from '../../mocks/reviews';
+import { countOffer } from '../../components/favorites-page-component/favorites-offers';
+
 
 const users = detailedOffers;
 let countComments;
@@ -19,7 +21,7 @@ function AuthorizedUserHeader () {
           <div className="header__avatar-wrapper user__avatar-wrapper">
           </div>
           <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-          <span className="header__favorite-count">3</span>
+          <span className="header__favorite-count">{countOffer}</span>
         </Link>
       </li>
       <li className="header__nav-item">
@@ -79,9 +81,10 @@ function CountRewies (id: string): number {
   return countComments;
 }
 
+
 function OfferPage () {
   const currentUrl = new URL(window.location.href);
-  const id: string = currentUrl.pathname.slice(9);
+  const id: string = currentUrl.pathname.slice(7);
   const user = (findUserById(id));
   const star = (`${Math.round(user.rating) * 20}%`);
   const classFavorite = `offer__bookmark-button button
@@ -89,6 +92,12 @@ function OfferPage () {
   `;
   countComments = CountRewies(id);
 
+  const nearbyCities = [];
+  for (let i = 0; i < users.length; i++) {
+    if (users[i].id !== id) {
+      nearbyCities.push(users[i]);
+    }
+  }
   return (
     <div className="page">
       <header className="header">
@@ -193,12 +202,13 @@ function OfferPage () {
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            <OfferNearPlaces />
+            <OfferNearPlaces temps = {nearbyCities}/>
           </section>
         </div>
       </main>
     </div>
   );
 }
+
 
 export default OfferPage;

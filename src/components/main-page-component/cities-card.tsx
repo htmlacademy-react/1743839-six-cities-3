@@ -1,4 +1,5 @@
 import {Link} from 'react-router-dom';
+import { useState } from 'react';
 
 function Premium () {
   return (
@@ -37,24 +38,19 @@ function Card({previewImage, title, type, price, isPremium, rating, isFavorite, 
   const classFavorite = `place-card__bookmark-button button
   ${isFavorite ? 'place-card__bookmark-button--active' : ''}
   `;
-  /*
+
+  const [isHovering, setIsHovering] = useState(false);
+
   const handleMouseOver = () => {
-    console.log('Mouse detected!');
-  };
-*/
-  let idOffer = '';
-  const handleClick = () => {
-    idOffer = `offer/id${ id}`;
-    return idOffer;
+    setIsHovering(true);
   };
 
-  const adresId = `offer/id${ id}`;
+  const handleMouseOut = () => {
+    setIsHovering(false);
+  };
 
   return (
-    <article className="cities__card place-card"
-      //onMouseOver={handleMouseOver}
-      onClick={handleClick}
-    >
+    <article onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} className={!isHovering ? 'cities__card place-card' : 'cities__card place-card--active'}>
       {isPremium ? <Premium /> : ''}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <a href="#">
@@ -86,7 +82,7 @@ function Card({previewImage, title, type, price, isPremium, rating, isFavorite, 
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={adresId}>
+          <Link to={`offer/${id}`}>
             {title}
           </Link>
         </h2>

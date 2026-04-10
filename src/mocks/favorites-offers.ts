@@ -110,7 +110,7 @@ const favoritesOffers = [
     'isFavorite': true,
     'isPremium': true,
     'rating': 1.2,
-    'previewImage': 'img/avatars/avatar_1.jpg'
+    'previewImage': 'img/paris_0.jpg'
   }, {
     'id': '2',
     'title': 'Заголовок_2',
