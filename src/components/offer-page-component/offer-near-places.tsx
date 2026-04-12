@@ -1,14 +1,3 @@
-import {Link} from 'react-router-dom';
-import { useState } from 'react';
-
-function Premium () {
-  return (
-    <div className="place-card__mark">
-      <span>Premium</span>
-    </div>
-  );
-}
-
 type CardProps = {
   id: string;
   title: string;
@@ -30,31 +19,32 @@ type CardProps = {
   isFavorite: boolean;
   isPremium: boolean;
   rating: number;
-  previewImage: string;
+  images: string[];
 }
 
-function Card({...props}: CardProps): JSX.Element {
+type Cart<T = CardProps> = {
+  temps: T[];
+}
+
+function Premium () {
+  return (
+    <div className="place-card__mark">
+      <span>Premium</span>
+    </div>
+  );
+}
+
+function CardNearPlace({...props}: CardProps): JSX.Element {
   const star = (`${Math.round(props.rating) * 20}%`);
   const classFavorite = `place-card__bookmark-button button
   ${props.isFavorite ? 'place-card__bookmark-button--active' : ''}
   `;
-
-  const [isHovering, setIsHovering] = useState(false);
-
-  const handleMouseOver = () => {
-    setIsHovering(true);
-  };
-
-  const handleMouseOut = () => {
-    setIsHovering(false);
-  };
-
   return (
-    <article onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} className={!isHovering ? 'cities__card place-card' : 'cities__card place-card--active'}>
+    <article className="near-places__card place-card" >
       {props.isPremium ? <Premium /> : ''}
-      <div className="cities__image-wrapper place-card__image-wrapper">
+      <div className="near-places__image-wrapper place-card__image-wrapper">
         <a href="#">
-          <img className="place-card__image" src={props.previewImage} width="260" height="200" alt="Place image" />
+          <img className="place-card__image" src={props.images} width="260" height="200" alt="Place image" />
         </a>
       </div>
       <div className="place-card__info">
@@ -67,7 +57,7 @@ function Card({...props}: CardProps): JSX.Element {
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark"></use>
             </svg>
-            <span className="visually-hidden">To bookmarks</span>
+            <span className="visually-hidden">In bookmarks</span>
           </button>
         </div>
         <div className="place-card__rating rating">
@@ -82,9 +72,9 @@ function Card({...props}: CardProps): JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={`offer/${props.id}`}>
+          <a href="#">
             {props.title}
-          </Link>
+          </a>
         </h2>
         <p className="place-card__type">{props.type}</p>
       </div>
@@ -92,34 +82,28 @@ function Card({...props}: CardProps): JSX.Element {
   );
 }
 
-type Cart<T = CardProps> = {
-  temps: T[];
-}
-
-function CitiesCard ({temps}: Cart<CardProps> = {temps: []}): JSX.Element {
-  const cards = temps.map((item) => (
-    <Card
+function OfferNearPlaces ({temps}: Cart<CardProps> = {temps: []}): JSX.Element {
+  const cardsNearPlace = temps.map((item) => (
+    <CardNearPlace
       key = {item.id}
       id = {item.id}
-      previewImage = {item.previewImage}
+      images= {item.images[0]}
       title = {item.title}
+      price = {item.price}
       type = {item.type
         .split(' ')
         .map((element) => `${element[0].toUpperCase()}${element.slice(1).toLowerCase()}`)
         .join(' ')}
-      price = {item.price}
-      isPremium = {item.isPremium}
       rating = {item.rating}
+      isPremium = {item.isPremium}
       isFavorite = {item.isFavorite}
     />
   ));
   return (
-    <div className="cities__places-list places__list tabs__content">
-      {cards}
+    <div className="near-places__list places__list">
+      {cardsNearPlace}
     </div>
   );
 }
 
-
-export default CitiesCard;
-
+export default OfferNearPlaces;

@@ -1,5 +1,6 @@
 import CitiesCard from './cities-card';
 import { options } from '../const';
+import listOffer from '../../mocks/offers';
 
 
 type CategoryProps= {
@@ -33,10 +34,18 @@ type NumberOfProposals = {
 }
 
 function CitiesPlaces ({offersCount}: NumberOfProposals): JSX.Element {
+  const handleMouseOver = () => {
+    //console.log('Mouse detected!');
+  };
+
   return (
     <>
       <h2 className="visually-hidden">Places</h2>
-      <b className="places__found">{offersCount} places to stay in Amsterdam</b>
+      <b className="places__found"
+        onMouseOver={handleMouseOver}
+      >{offersCount} places to stay in Amsterdam
+
+      </b>
       <form className="places__sorting" action="#" method="get">
         <span className="places__sorting-caption">Sort by</span>
         <span className="places__sorting-type" tabIndex={0}>
@@ -47,7 +56,7 @@ function CitiesPlaces ({offersCount}: NumberOfProposals): JSX.Element {
         </span>
         <CategorySort />
       </form>
-      <CitiesCard />
+      <CitiesCard temps = {listOffer} />
     </>
   );
 }
