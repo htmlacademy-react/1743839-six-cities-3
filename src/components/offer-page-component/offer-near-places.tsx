@@ -34,23 +34,23 @@ function Premium () {
   );
 }
 
-function CardNearPlace({images, title, price, type, rating, isFavorite, isPremium, id}: CardProps): JSX.Element {
-  const star = (`${Math.round(rating) * 20}%`);
+function CardNearPlace({...props}: CardProps): JSX.Element {
+  const star = (`${Math.round(props.rating) * 20}%`);
   const classFavorite = `place-card__bookmark-button button
-  ${isFavorite ? 'place-card__bookmark-button--active' : ''}
+  ${props.isFavorite ? 'place-card__bookmark-button--active' : ''}
   `;
   return (
     <article className="near-places__card place-card" >
-      {isPremium ? <Premium /> : ''}
+      {props.isPremium ? <Premium /> : ''}
       <div className="near-places__image-wrapper place-card__image-wrapper">
         <a href="#">
-          <img className="place-card__image" src={images} width="260" height="200" alt="Place image" />
+          <img className="place-card__image" src={props.images} width="260" height="200" alt="Place image" />
         </a>
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
-            <b className="place-card__price-value">&euro;{price}</b>
+            <b className="place-card__price-value">&euro;{props.price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
           <button className={classFavorite} type="button">
@@ -73,10 +73,10 @@ function CardNearPlace({images, title, price, type, rating, isFavorite, isPremiu
         </div>
         <h2 className="place-card__name">
           <a href="#">
-            {title}
+            {props.title}
           </a>
         </h2>
-        <p className="place-card__type">{type}</p>
+        <p className="place-card__type">{props.type}</p>
       </div>
     </article>
   );

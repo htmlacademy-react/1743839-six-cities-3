@@ -15,11 +15,11 @@ function Details({rating, review}: {rating: number; review: string}) {
 
 function OfferForm () {
   const [formData, setFormData] = useState({
-    rating: '',
+    rating: 0,
     review: ''
   });
 
-  const handleFieldChange = (evt) => {
+  const handleFieldChange = (evt: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const {name, value}: {name: string; value: string | number} = evt.target;
     setFormData({...formData, [name]: value});
   };
